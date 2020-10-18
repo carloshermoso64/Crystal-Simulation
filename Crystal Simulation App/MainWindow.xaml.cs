@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
+using System.Timers;
 
 namespace Crystal_Simulation_App
 {
@@ -35,15 +36,18 @@ namespace Crystal_Simulation_App
         public double M;
         public double deltat;
 
+        DispatcherTimer timer;
+
+        bool timerenabled = false;
+
 
 
         public MainWindow()
         {
             InitializeComponent();
-            DispatcherTimer timer = new DispatcherTimer();
+            timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
-            timer.Start();
         }
 
         private void R_MouseDown(object sender, MouseButtonEventArgs e)
@@ -52,11 +56,12 @@ namespace Crystal_Simulation_App
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            timer.Interval = TimeSpan.FromSeconds(1 / slider_Interval.Value);
         }
 
         private void bt_LoadPanel_Click(object sender, RoutedEventArgs e)
         {
-                        rows = Convert.ToInt32(tb_Rows.Text);
+            rows = Convert.ToInt32(tb_Rows.Text);
             columns = Convert.ToInt32(tb_Columns.Text);
 
             deltax = Convert.ToDouble(tb_deltax.Text.Replace(".",","));
@@ -88,6 +93,18 @@ namespace Crystal_Simulation_App
                     grid[i, j] = r;
                 }
             }
+        }
+
+        private void bt_StartSimulation_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Start();
+            timerenabled = true;
+        }
+
+        private void bt_PauseSimulation_Click(object sender, RoutedEventArgs e)
+        {
+            if (timerenabled == true) { timer.Stop(); }
+            else if (timerenabled == false) { timer.Start(); }
         }
     }
 }

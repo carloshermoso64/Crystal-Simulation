@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920">
     <Grid Margin="0,0,0,1">
-        <Canvas Name="panelGame" HorizontalAlignment="Left" Height="943" Margin="931,53,0,0" VerticalAlignment="Top" Width="943"/>
+        <Canvas Name="panelGame" Height="950" Margin="931,53,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="950"/>
 
 
         <Label Content="Rows:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,53,0,0" FontSize="20"/>
@@ -34,7 +34,12 @@
         <TextBox Name="tb_M" HorizontalAlignment="Left" Height="30" Margin="287,222,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="100" FontSize="20"/>
 
 
-        <Button Name="bt_LoadPanel" Content="Load Panel" HorizontalAlignment="Left" Height="30" Margin="61,333,0,0" VerticalAlignment="Top" Width="326" Click="bt_LoadPanel_Click"/>
+
+        <Button Name="bt_LoadPanel" Content="Load Panel" HorizontalAlignment="Left" Height="30" Margin="60,333,0,0" VerticalAlignment="Top" Width="326" Click="bt_LoadPanel_Click"/>
+        <Label Content="Change Simulation Speed:" HorizontalAlignment="Left" Height="39" Margin="65,555,0,0" VerticalAlignment="Top" Width="231" FontSize="15"/>
+        <Slider Name="slider_Interval" HorizontalAlignment="Left" Height="20" Margin="65,599,0,0" VerticalAlignment="Top" Width="257" Minimum="0.1" Value="1"/>
+        <Button x:Name="bt_StartSimulation" Content="Start Simulation" HorizontalAlignment="Left" Height="30" Margin="60,378,0,0" VerticalAlignment="Top" Width="326" Click="bt_StartSimulation_Click"/>
+        <Button x:Name="bt_PauseSimulation" Content="Pause/Continue Simulation" HorizontalAlignment="Left" Height="30" Margin="60,426,0,0" VerticalAlignment="Top" Width="326" Click="bt_PauseSimulation_Click"/>
 
 
 
