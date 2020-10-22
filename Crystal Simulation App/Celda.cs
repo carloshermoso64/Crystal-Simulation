@@ -12,6 +12,7 @@ namespace Crystal_Simulation_App
         double temperaturaFutura;
         double faseActual;
         double faseFutura;
+
         Parametros param;
 
         //Constructores
@@ -59,7 +60,7 @@ namespace Crystal_Simulation_App
         }
         public void SetFaseFutura(double fF)
         {
-            this.faseActual = fF;
+            this.faseFutura = fF;
         }
 
         public double GetFaseFutura()
@@ -77,6 +78,7 @@ namespace Crystal_Simulation_App
             double alpha = param.GetAlpha();
             double deltaX = param.GetDeltaX();
             double deltaY = param.GetDeltaY();
+            double deltaT = param.GetDeltaT();
             double epsilon = param.GetEpsilon();
 
             // Segundas derivadas
@@ -95,6 +97,11 @@ namespace Crystal_Simulation_App
 
             double derivadafaset = (1 / (epsilon * epsilon * M)) * (faseActual*(1 - faseActual)*(faseActual - 0.5 + 30*epsilon*alpha*delta*faseActual*(1-faseActual))) + (epsilon * epsilon * laplacianoFase);
             double derivadatemperaturat = laplacianoTemperatura - (1 / delta) * (30 * Math.Pow(faseActual, 2) - 60 * Math.Pow(faseActual,3) + 30 * Math.Pow(faseActual,4))*derivadafaset;
+
+            // Set fase y temperatura futura 
+
+            this.faseFutura = Math.Min(faseActual + (derivadafaset * deltaT), 1);
+            this.temperaturaFutura = Math.Max(temperaturaActual + (derivadatemperaturat * deltaT), -1)
         }
 
 
