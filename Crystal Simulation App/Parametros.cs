@@ -13,6 +13,7 @@ namespace Crystal_Simulation_App
         double alpha;
         double deltaT;
         double deltaX;
+        double deltaY;
         double epsilon;
     
 
@@ -25,16 +26,18 @@ namespace Crystal_Simulation_App
             this.alpha = 400;
             this.deltaT = 0.00001;
             this.deltaX = 0.005;
+            this.deltaY = 0.005;
             this.epsilon = 0.005;
     }
 
-        public Parametros(double m, double delta, double alpha, double deltaT, double deltaX, double epsilon)
+        public Parametros(double m, double delta, double alpha, double deltaT, double deltaX, double deltaY, double epsilon)
         {
             M = m;
             this.delta = delta;
             this.alpha = alpha;
             this.deltaT = deltaT;
             this.deltaX = deltaX;
+            this.deltaY = deltaY;
             this.epsilon = epsilon;
         }
 
@@ -90,6 +93,15 @@ namespace Crystal_Simulation_App
             return this.deltaX;
         }
 
+        public void SetDeltaY(double deltaY)
+        {
+            this.deltaY = deltaY;
+        }
+
+        public double GetDeltaY()
+        {
+            return deltaY;
+        }
         public void SetEpsilon(double epsilon)
         {
             this.epsilon = epsilon;
