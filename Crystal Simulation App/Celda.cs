@@ -27,44 +27,46 @@ namespace Crystal_Simulation_App
         }
 
         //Getters y setters
-        public void setTemperaturaActual(double tA)
+        public void SetTemperaturaActual(double tA)
         {
             this.temperaturaActual = tA;
         }
 
-        public double getTemperaturaActual()
+        public double GetTemperaturaActual()
         {
             return this.temperaturaActual;
         }
 
-        public void setTemperaturaFutura(double tF)
+        public void SetTemperaturaFutura(double tF)
         {
             this.temperaturaFutura = tF;
         }
 
-        public double getTemperaturaFutura()
+        public double GetTemperaturaFutura()
         {
             return this.temperaturaFutura;
         }
 
-        public void setFaseActual(double fA)
+        public void SetFaseActual(double fA)
         {
             this.faseActual = fA;
         }
 
-        public double getFaseActual()
+        public double GetFaseActual()
         {
             return this.faseActual;
         }
-        public void setFaseFutura(double fF)
+        public void SetFaseFutura(double fF)
         {
             this.faseActual = fF;
         }
 
-        public double getFaseFutura()
+        public double GetFaseFutura()
         {
             return this.faseFutura;
         }
+
+        public double C
 
     }
 }
