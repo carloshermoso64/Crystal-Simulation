@@ -33,7 +33,9 @@ namespace Crystal_Simulation_App
                 while (j < columnas + 2)
                 {
                     this.panel[i, j] = new Celda(-1, 1); //Celda en estado liquido 
+                    j++;
                 }
+                i++;
             }
         }
 
@@ -67,6 +69,30 @@ namespace Crystal_Simulation_App
         public Celda GetCelda(int fila, int columna)
         {
             return this.panel[fila, columna];
+        }
+
+        public void ActualizarMatriz()
+        {
+            int i = 1;
+            while(i < filas + 1)
+            {
+                int j = 1;
+                while(j < columnas + 1)
+                {
+                    // Estado de la Celda a investigar
+                    double faseActual = this.panel[i, j].GetFaseActual();
+                    double temperaturaActual = this.panel[i, j].GetTemperaturaActual();
+
+                    //Estado de la celda superior
+                    double faseSuperior = this.panel[i + 1, j].GetFaseActual();
+                    double temperaturaSuperior = this.panel[i + 1, j].GetTemperaturaActual();
+
+                  //  this.panel[i,j].CalcularEstadosFuturos(new Parametros(), faseSuperior,)
+
+                    j++;
+                }
+                i++;
+            }
         }
     }
 }

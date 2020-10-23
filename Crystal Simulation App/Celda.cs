@@ -18,8 +18,8 @@ namespace Crystal_Simulation_App
         //Constructores
         public Celda()
         {
-            this.temperaturaActual = 0;
-            this.faseActual = 0;
+            this.temperaturaActual = -1;
+            this.faseActual = 1;
         }
 
         public Celda(double t, double f)

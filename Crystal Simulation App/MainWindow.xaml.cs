@@ -71,7 +71,6 @@ namespace Crystal_Simulation_App
             epsilon = Convert.ToDouble(tb_epsilon.Text.Replace(".", ","));
             B = Convert.ToDouble(tb_B.Text.Replace(".", ","));
             M = Convert.ToDouble(tb_M.Text.Replace(".", ","));
-
             grid = new Rectangle[rows, columns];
 
             //inicializamos la parte grafica
