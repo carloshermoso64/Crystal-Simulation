@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Crystal_Simulation_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920">
-    <Grid Margin="0,0,0,1">
-        <Canvas Name="panelGame" Height="950" Margin="931,53,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="950"/>
+        Title="MainWindow" Height="913.141" Width="1610.119">
+    <Grid Margin="0,0,376,175.5">
+        <Canvas Name="panelGame" Height="625" Margin="431,53,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="691"/>
 
 
         <Label Content="Rows:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,53,0,0" FontSize="20"/>

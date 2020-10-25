@@ -30,6 +30,7 @@ namespace Crystal_Simulation_App
         Rectangle[,] grid;
         Matriz matriz;
         Parametros param;
+        Celda celdasolida;
 
         public double deltax;
         public double deltay;
@@ -107,7 +108,8 @@ namespace Crystal_Simulation_App
             param = new Parametros();
             grid = new Rectangle[rows, columns];
             matriz = new Matriz(columns, rows, param);
-
+            celdasolida = new Celda(0, 0, param);
+            matriz.SetCelda(5, 5, celdasolida);
 
             params1 = new Parametros(M, delta, alpha, deltat, deltax, deltay, epsilon);
 
