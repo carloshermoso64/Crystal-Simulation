@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.Timers;
+using System.Xaml.Schema;
 
 namespace Crystal_Simulation_App
 {
@@ -33,7 +34,7 @@ namespace Crystal_Simulation_App
         public double deltax;
         public double deltay;
         public double epsilon;
-        public double B;
+        public double alpha;
         public double delta;
         public double M;
         public double deltat;
@@ -41,6 +42,8 @@ namespace Crystal_Simulation_App
         DispatcherTimer timer;
 
         bool timerenabled = false;
+        List<Matriz> listaMatrices = new List<Matriz>();
+        Parametros params1;
 
 
 
@@ -63,6 +66,28 @@ namespace Crystal_Simulation_App
             matriz.AvanzarIteracion();
 
 
+            // Creamos un panel y lo coloreamos en funcion de los valores de temp y fase de cada celda
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    double T = matriz.GetCelda(i, j).GetTemperaturaActual();
+                    double F = matriz.GetCelda(i, j).GetFaseActual();
+
+                    if (T > 0) { T = 0; }
+                    if (T < -1) { T = -1; }
+                    if (F < 0) { F = 0; }
+                    if (F > 1) { F = 1; }
+
+                    byte redvalue = Convert.ToByte(Math.Floor(0.5 * (1 - F) * 255 + 0.5 * (1 + T) * 255));
+
+                    SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                    mySolidColorBrush.Color = Color.FromArgb(255, redvalue, 0, 0);
+
+                    grid[i, j].Fill = mySolidColorBrush;
+                }
+            }
+
         }
 
         private void bt_LoadPanel_Click(object sender, RoutedEventArgs e)
@@ -75,12 +100,17 @@ namespace Crystal_Simulation_App
             deltat = Convert.ToDouble(tb_deltat.Text.Replace(".", ","));
             delta = Convert.ToDouble(tb_delta.Text.Replace(".", ","));
             epsilon = Convert.ToDouble(tb_epsilon.Text.Replace(".", ","));
-            B = Convert.ToDouble(tb_B.Text.Replace(".", ","));
+            alpha = Convert.ToDouble(tb_alpha.Text.Replace(".", ","));
+            
             M = Convert.ToDouble(tb_M.Text.Replace(".", ","));
 
             param = new Parametros();
             grid = new Rectangle[rows, columns];
-            matriz = new Matriz(columns, rows);
+            matriz = new Matriz(columns, rows, param);
+
+
+            params1 = new Parametros(M, delta, alpha, deltat, deltax, deltay, epsilon);
+
 
 
             //inicializamos la parte grafica
@@ -88,10 +118,13 @@ namespace Crystal_Simulation_App
             {
                 for (int j = 0; j < columns; j++)
                 {
+                    SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                    mySolidColorBrush.Color = Color.FromArgb(255, 0, 0, 0);
+
                     Rectangle r = new Rectangle();
                     r.Width = panelGame.ActualWidth / columns - 0.75;
                     r.Height = panelGame.ActualHeight / rows - 0.75;
-                    r.Fill = Brushes.Black;
+                    r.Fill = mySolidColorBrush;
                     r.StrokeThickness = 0.5;
                     r.Stroke = Brushes.White;
                     panelGame.Children.Add(r);
@@ -102,6 +135,11 @@ namespace Crystal_Simulation_App
                     grid[i, j] = r;
                 }
             }
+
+            // Creamos un objeto matriz inicial:
+            Matriz matriz1 = new Matriz(rows, columns, params1);
+            listaMatrices.Add(matriz1);
+
         }
 
         private void bt_StartSimulation_Click(object sender, RoutedEventArgs e)

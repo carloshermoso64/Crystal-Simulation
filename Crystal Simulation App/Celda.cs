@@ -12,7 +12,6 @@ namespace Crystal_Simulation_App
         double temperaturaFutura;
         double faseActual;
         double faseFutura;
-
         Parametros param;
 
         //Constructores
@@ -22,10 +21,11 @@ namespace Crystal_Simulation_App
             this.faseActual = 1;
         }
 
-        public Celda(double t, double f)
+        public Celda(double t, double f, Parametros parametros)
         {
             this.temperaturaActual = t;
             this.faseActual = f;
+            this.param = parametros;
         }
 
         //Getters y setters
@@ -103,7 +103,5 @@ namespace Crystal_Simulation_App
             this.faseFutura = Math.Min(faseActual + (derivadafaset * deltaT), 1);
             this.temperaturaFutura = Math.Max(temperaturaActual + (derivadatemperaturat * deltaT), -1);
         }
-
-
     }
 }

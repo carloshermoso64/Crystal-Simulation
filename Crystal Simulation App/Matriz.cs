@@ -11,6 +11,7 @@ namespace Crystal_Simulation_App
         Celda[,] panel;
         int columnas;
         int filas;
+
         Parametros param;
 
 
@@ -21,11 +22,13 @@ namespace Crystal_Simulation_App
 
         }
 
-        public Matriz(int columnas, int filas)
+        public Matriz(int columnas, int filas, Parametros param)
         {
             this.columnas = columnas;
             this.filas = filas;
             this.panel = new Celda[filas + 2, columnas + 2];
+            this.param = param;
+
 
             int i = 0;
             while (i < filas + 2)
@@ -33,7 +36,7 @@ namespace Crystal_Simulation_App
                 int j = 0;
                 while (j < columnas + 2)
                 {
-                    this.panel[i, j] = new Celda(-1, 1); //Celda en estado liquido 
+                    this.panel[i, j] = new Celda(-1, 1, param); //Celda en estado liquido 
                     j++;
                 }
                 i++;
@@ -85,20 +88,20 @@ namespace Crystal_Simulation_App
                     double temperaturaActual = this.panel[i, j].GetTemperaturaActual();
 
                     //Estado de la celda superior
-                    double faseSuperior = this.panel[i + 1, j].GetFaseActual();
-                    double temperaturaSuperior = this.panel[i + 1, j].GetTemperaturaActual();
+                    double faseSuperior = this.panel[i - 1, j].GetFaseActual();
+                    double temperaturaSuperior = this.panel[i - 1, j].GetTemperaturaActual();
 
                     //Estado de la celda inferior
-                    double faseInferior = this.panel[i - 1, j].GetFaseActual();
-                    double temperaturaInferior = this.panel[i - 1, j].GetTemperaturaActual();
+                    double faseInferior = this.panel[i , j].GetFaseActual();
+                    double temperaturaInferior = this.panel[i + 1, j].GetTemperaturaActual();
+
+                    //Estado de la celda izquierda
+                    double faseIzquierda = this.panel[i , j - 1].GetFaseActual();
+                    double temperaturaIzquierda = this.panel[i , j - 1].GetTemperaturaActual();
 
                     //Estado de la celda derecha
                     double faseDerecha = this.panel[i, j + 1].GetFaseActual();
                     double temperaturaDerecha = this.panel[i, j + 1].GetTemperaturaActual();
-
-                    //Estado de la celda izquierda 
-                    double faseIzquierda = this.panel[i, j - 1].GetFaseActual();
-                    double temperaturaIzquierda = this.panel[i, j - 1].GetTemperaturaActual();
 
                     //Calcular Estados futuros
                     this.panel[i, j].CalcularEstadosFuturos(param, faseSuperior, faseInferior, faseDerecha, faseIzquierda, temperaturaSuperior, temperaturaInferior, temperaturaDerecha, temperaturaIzquierda);
@@ -122,6 +125,7 @@ namespace Crystal_Simulation_App
                 }
                 i++;
             }
+            
         }
 
     }
