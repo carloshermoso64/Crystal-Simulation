@@ -101,7 +101,7 @@ namespace Crystal_Simulation_App
             // Set fase y temperatura futura 
 
             this.faseFutura = Math.Min(faseActual + (derivadafaset * deltaT), 1);
-            this.temperaturaFutura = Math.Max(temperaturaActual + (derivadatemperaturat * deltaT), -1)
+            this.temperaturaFutura = Math.Max(temperaturaActual + (derivadatemperaturat * deltaT), -1);
         }
 
 

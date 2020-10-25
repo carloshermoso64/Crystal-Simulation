@@ -27,6 +27,8 @@ namespace Crystal_Simulation_App
         public int columns;
 
         Rectangle[,] grid;
+        Matriz matriz;
+        Parametros param;
 
         public double deltax;
         public double deltay;
@@ -57,6 +59,10 @@ namespace Crystal_Simulation_App
         private void timer_Tick(object sender, EventArgs e)
         {
             timer.Interval = TimeSpan.FromSeconds(1 / slider_Interval.Value);
+            matriz.ActualizarMatriz(param);
+            matriz.AvanzarIteracion();
+
+
         }
 
         private void bt_LoadPanel_Click(object sender, RoutedEventArgs e)
@@ -71,7 +77,11 @@ namespace Crystal_Simulation_App
             epsilon = Convert.ToDouble(tb_epsilon.Text.Replace(".", ","));
             B = Convert.ToDouble(tb_B.Text.Replace(".", ","));
             M = Convert.ToDouble(tb_M.Text.Replace(".", ","));
+
+            param = new Parametros();
             grid = new Rectangle[rows, columns];
+            matriz = new Matriz(columns, rows);
+
 
             //inicializamos la parte grafica
             for (int i = 0; i < rows; i++)

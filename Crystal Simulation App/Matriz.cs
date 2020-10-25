@@ -11,6 +11,7 @@ namespace Crystal_Simulation_App
         Celda[,] panel;
         int columnas;
         int filas;
+        Parametros param;
 
 
         //Constructores 
@@ -71,13 +72,13 @@ namespace Crystal_Simulation_App
             return this.panel[fila, columna];
         }
 
-        public void ActualizarMatriz()
+        public void ActualizarMatriz(Parametros param)
         {
             int i = 1;
-            while(i < filas + 1)
+            while (i < filas + 1)
             {
                 int j = 1;
-                while(j < columnas + 1)
+                while (j < columnas + 1)
                 {
                     // Estado de la Celda a investigar
                     double faseActual = this.panel[i, j].GetFaseActual();
@@ -87,12 +88,41 @@ namespace Crystal_Simulation_App
                     double faseSuperior = this.panel[i + 1, j].GetFaseActual();
                     double temperaturaSuperior = this.panel[i + 1, j].GetTemperaturaActual();
 
-                  //  this.panel[i,j].CalcularEstadosFuturos(new Parametros(), faseSuperior,)
+                    //Estado de la celda inferior
+                    double faseInferior = this.panel[i - 1, j].GetFaseActual();
+                    double temperaturaInferior = this.panel[i - 1, j].GetTemperaturaActual();
+
+                    //Estado de la celda derecha
+                    double faseDerecha = this.panel[i, j + 1].GetFaseActual();
+                    double temperaturaDerecha = this.panel[i, j + 1].GetTemperaturaActual();
+
+                    //Estado de la celda izquierda 
+                    double faseIzquierda = this.panel[i, j - 1].GetFaseActual();
+                    double temperaturaIzquierda = this.panel[i, j - 1].GetTemperaturaActual();
+
+                    //Calcular Estados futuros
+                    this.panel[i, j].CalcularEstadosFuturos(param, faseSuperior, faseInferior, faseDerecha, faseIzquierda, temperaturaSuperior, temperaturaInferior, temperaturaDerecha, temperaturaIzquierda);
 
                     j++;
                 }
                 i++;
             }
         }
+        public void AvanzarIteracion()
+        {
+            int i = 1;
+            while (i < filas + 1)
+            {
+                int j = 1;
+                while (j < columnas + 1)
+                {
+                    this.panel[i, j].SetFaseActual(this.panel[i, j].GetFaseFutura());
+                    this.panel[i, j].SetTemperaturaActual(this.panel[i, j].GetTemperaturaFutura());
+                    j++;
+                }
+                i++;
+            }
+        }
+
     }
 }
