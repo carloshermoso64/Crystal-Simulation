@@ -65,6 +65,7 @@ namespace Crystal_Simulation_App
             timer.Interval = TimeSpan.FromSeconds(1 / slider_Interval.Value);
             matriz.ActualizarMatriz(param);
             matriz.AvanzarIteracion();
+            temperaturaResultadoLabel.Content = matriz.GetCelda(4, 4).GetTemperaturaActual();
 
 
             // Creamos un panel y lo coloreamos en funcion de los valores de temp y fase de cada celda
@@ -85,7 +86,14 @@ namespace Crystal_Simulation_App
                     SolidColorBrush mySolidColorBrush = new SolidColorBrush();
                     mySolidColorBrush.Color = Color.FromArgb(255, redvalue, 0, 0);
 
+
                     grid[i, j].Fill = mySolidColorBrush;
+
+                    TextBlock TB = new TextBlock();
+                    TB.Text = matriz.GetCelda(i,j).GetTemperaturaActual().ToString();
+                    //The next two magical lines create a special brush that contains a bitmap rendering of the UI element that can then be used like any other brush and its in hardware and is almost the text book example for utilizing all hardware rending performances in WPF unleashed 4.5
+                    BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
+                    grid[i,j].Fill = bcb;
                 }
             }
 
@@ -129,6 +137,7 @@ namespace Crystal_Simulation_App
                     r.Fill = mySolidColorBrush;
                     r.StrokeThickness = 0.5;
                     r.Stroke = Brushes.White;
+
                     panelGame.Children.Add(r);
                     Canvas.SetLeft(r, j * panelGame.ActualWidth / columns);
                     Canvas.SetTop(r, i * panelGame.ActualHeight / rows);

@@ -104,6 +104,14 @@ namespace Crystal_Simulation_App
                     double temperaturaDerecha = this.panel[i, j + 1].GetTemperaturaActual();
 
                     //Calcular Estados futuros
+                    if (i == 5 && j == 4){
+                        int stop = 1;
+                    }
+                    if (i == 6 && j == 4)
+                    {
+                        int stop = 1;
+                    }
+
                     this.panel[i, j].CalcularEstadosFuturos(param, faseSuperior, faseInferior, faseDerecha, faseIzquierda, temperaturaSuperior, temperaturaInferior, temperaturaDerecha, temperaturaIzquierda);
 
                     j++;

@@ -24,7 +24,7 @@ namespace Crystal_Simulation_App
             this.M = 20;
             this.delta = 0.5;
             this.alpha = 400;
-            this.deltaT = 0.00001;
+            this.deltaT = 0.000005;
             this.deltaX = 0.005;
             this.deltaY = 0.005;
             this.epsilon = 0.005;
