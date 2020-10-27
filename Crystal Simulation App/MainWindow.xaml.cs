@@ -152,8 +152,8 @@ namespace Crystal_Simulation_App
 
         private void bt_PauseSimulation_Click(object sender, RoutedEventArgs e)
         {
-            if (timerenabled == true) { timer.Stop(); }
-            else if (timerenabled == false) { timer.Start(); }
+            if (timerenabled == true) { timer.Stop(); timerenabled = false; }
+            else if (timerenabled == false) { timer.Start(); timerenabled = true; }
         }
     }
 }
