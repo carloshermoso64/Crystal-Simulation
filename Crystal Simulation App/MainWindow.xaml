@@ -41,6 +41,8 @@
         <Button x:Name="bt_PauseSimulation" Content="Pause/Continue Simulation" HorizontalAlignment="Left" Height="30" Margin="60,426,0,0" VerticalAlignment="Top" Width="326" Click="bt_PauseSimulation_Click"/>
         <TextBox x:Name="tb_alpha" HorizontalAlignment="Left" Height="30" Margin="286,172,0,0" TextWrapping="Wrap" Text="400" VerticalAlignment="Top" Width="100" FontSize="20"/>
         <Label x:Name="temperaturaResultadoLabel" Content="Label" HorizontalAlignment="Left" Margin="168,495,0,0" VerticalAlignment="Top"/>
+        <Button Name="bt_NextStep" Content="Load Panel" HorizontalAlignment="Left" Height="30" Margin="65,716,0,0" VerticalAlignment="Top" Width="326" Click="bt_NextStep_Click"/>
+
 
 
 
