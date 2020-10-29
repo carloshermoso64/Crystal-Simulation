@@ -104,6 +104,10 @@ namespace Crystal_Simulation_App
 
             SetFaseFutura(Math.Min(faseActual + (derivadafaset * deltaT), 1));
             SetTemperaturaFutura(Math.Max(temperaturaActual + (derivadatemperaturat * deltaT), -1));
+            if (temperaturaActual + (derivadatemperaturat * deltaT) > 1)
+            {
+                SetTemperaturaFutura(-1);
+            }
 
         }
     }

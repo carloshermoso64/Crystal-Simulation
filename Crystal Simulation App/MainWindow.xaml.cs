@@ -55,6 +55,9 @@ namespace Crystal_Simulation_App
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
+            bt_StartSimulation.Visibility = Visibility.Hidden;
+            bt_PauseSimulation.Visibility = Visibility.Hidden;
+            bt_NextStep.Visibility = Visibility.Hidden;
         }
 
         private void R_MouseDown(object sender, MouseButtonEventArgs e)
@@ -66,7 +69,6 @@ namespace Crystal_Simulation_App
             timer.Interval = TimeSpan.FromSeconds(1 / slider_Interval.Value);
             matriz.ActualizarMatriz(param);
             matriz.AvanzarIteracion();
-            temperaturaResultadoLabel.Content = matriz.GetCelda(4, 4).GetTemperaturaActual();
 
 
             // Creamos un panel y lo coloreamos en funcion de los valores de TEMPERATURA de cada celda
@@ -135,7 +137,7 @@ namespace Crystal_Simulation_App
             alpha = Convert.ToDouble(tb_alpha.Text.Replace(".", ","));
             M = Convert.ToDouble(tb_M.Text.Replace(".", ","));
 
-            param = new Parametros();
+            
             grid_temp = new Rectangle[rows, columns];
             grid_phase = new Rectangle[rows, columns];
             matriz = new Matriz(columns, rows, param);
@@ -145,7 +147,7 @@ namespace Crystal_Simulation_App
             int centralcell_j = Convert.ToInt32(Math.Floor(Convert.ToDouble(columns) / 2));
             matriz.SetCelda( centralcell_i, centralcell_j, celdasolida);
 
-            params1 = new Parametros(M, delta, alpha, deltat, deltax, deltay, epsilon);
+            param = new Parametros(M, delta, alpha, deltat, deltax, deltay, epsilon);
 
 
             //inicializamos la parte grafica
@@ -198,6 +200,8 @@ namespace Crystal_Simulation_App
                 }
             }
 
+
+
             // Luego coloreamos Matrices
 
             // Creamos un panel y lo coloreamos en funcion de los valores de TEMPERATURA de cada celda
@@ -246,9 +250,10 @@ namespace Crystal_Simulation_App
                 }
             }
 
-            // Creamos un objeto matriz inicial:
-            Matriz matriz1 = new Matriz(rows, columns, params1);
-            listaMatrices.Add(matriz1);
+            bt_StartSimulation.Visibility = Visibility.Visible;
+            bt_PauseSimulation.Visibility = Visibility.Visible;
+            bt_NextStep.Visibility = Visibility.Visible;
+
 
         }
 
@@ -268,8 +273,6 @@ namespace Crystal_Simulation_App
         {
             matriz.ActualizarMatriz(param);
             matriz.AvanzarIteracion();
-            temperaturaResultadoLabel.Content = matriz.GetCelda(4, 4).GetTemperaturaActual();
-
 
             // Creamos un panel y lo coloreamos en funcion de los valores de TEMPERATURA de cada celda
             for (int i = 0; i < rows; i++)
