@@ -69,7 +69,7 @@ namespace Crystal_Simulation_App
             temperaturaResultadoLabel.Content = matriz.GetCelda(4, 4).GetTemperaturaActual();
 
 
-            // Creamos un panel y lo coloreamos en funcion de los valores de temp de cada celda
+            // Creamos un panel y lo coloreamos en funcion de los valores de TEMPERATURA de cada celda
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
@@ -92,11 +92,16 @@ namespace Crystal_Simulation_App
                 }
             }
 
-            // Creamos un panel y lo coloreamos en funcion de los valores de fase de cada celda
+            // Creamos un panel y lo coloreamos en funcion de los valores de FASE de cada celda
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
+                    if(i==2 && j==2)
+                    {
+
+                    }
+
                     double F = matriz.GetCelda(i, j).GetFaseActual();
 
                     if (F < 0) { F = 0; }
@@ -135,7 +140,7 @@ namespace Crystal_Simulation_App
             grid_phase = new Rectangle[rows, columns];
             matriz = new Matriz(columns, rows, param);
             celdasolida = new Celda(0, 0, param);
-            matriz.SetCelda(5, 5, celdasolida);
+            matriz.SetCelda(2, 2, celdasolida);
 
             params1 = new Parametros(M, delta, alpha, deltat, deltax, deltay, epsilon);
 
@@ -166,7 +171,7 @@ namespace Crystal_Simulation_App
                 }
             }
 
-            // 1. Grafica Temp
+            // 2. Grafica Phase
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
@@ -210,7 +215,56 @@ namespace Crystal_Simulation_App
 
         private void bt_NextStep_Click(object sender, RoutedEventArgs e)
         {
-           
+            matriz.ActualizarMatriz(param);
+            matriz.AvanzarIteracion();
+            temperaturaResultadoLabel.Content = matriz.GetCelda(4, 4).GetTemperaturaActual();
+
+
+            // Creamos un panel y lo coloreamos en funcion de los valores de TEMPERATURA de cada celda
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    double T = matriz.GetCelda(i, j).GetTemperaturaActual();
+
+                    if (T > 0) { T = 0; }
+                    if (T < -1) { T = -1; }
+
+                    //byte redvalue = Convert.ToByte(Math.Floor((1 + T) * 255));
+                    //SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                    //mySolidColorBrush.Color = Color.FromArgb(redvalue, 255, 0, 0);
+                    //grid_temp[i, j].Fill = mySolidColorBrush;
+
+                    TextBlock TB = new TextBlock();
+                    TB.Text = Math.Round(matriz.GetCelda(i, j).GetTemperaturaActual(),2).ToString();
+                    //The next two magical lines create a special brush that contains a bitmap rendering of the UI element that can then be used like any other brush and its in hardware and is almost the text book example for utilizing all hardware rending performances in WPF unleashed 4.5
+                    BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
+                    grid_temp[i, j].Fill = bcb;
+                }
+            }
+
+            // Creamos un panel y lo coloreamos en funcion de los valores de FASE de cada celda
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    double F = matriz.GetCelda(i, j).GetFaseActual();
+
+                    if (F < 0) { F = 0; }
+                    if (F > 1) { F = 1; }
+
+                    //byte bluevalue = Convert.ToByte(Math.Floor((1 - F) * 255));
+                    //SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                    //mySolidColorBrush.Color = Color.FromArgb(bluevalue, 0, 0, 255);
+                    //grid_phase[i, j].Fill = mySolidColorBrush;
+
+                    TextBlock TB = new TextBlock();
+                    TB.Text = Math.Round(matriz.GetCelda(i, j).GetFaseActual(),2).ToString();
+                    //The next two magical lines create a special brush that contains a bitmap rendering of the UI element that can then be used like any other brush and its in hardware and is almost the text book example for utilizing all hardware rending performances in WPF unleashed 4.5
+                    BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
+                    grid_phase[i, j].Fill = bcb;
+                }
+            }
         }
     }
 }
