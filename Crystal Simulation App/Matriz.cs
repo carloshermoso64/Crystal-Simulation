@@ -27,22 +27,22 @@ namespace Crystal_Simulation_App
         {
             this.columnas = columnas;
             this.filas = filas;
-            this.panel = new Celda[filas + 2, columnas + 2];
+            this.panel = new Celda[filas, columnas];
             this.param = param;
 
 
-            int i = 1;
-            while (i < filas + 1)
+            int i =0;
+            while (i < filas)
             {
-                int j = 1;
-                while (j < columnas + 1)
+                int j = 0;
+                while (j < columnas)
                 {
                     this.panel[i, j] = new Celda(-1, 1, param); //Celda en estado liquido 
                     j++;
                 }
                 i++;
             }
-            ContornoReflector();
+            //ContornoReflector();
         }
 
         // Getters y setters
@@ -79,7 +79,7 @@ namespace Crystal_Simulation_App
 
         public void ActualizarMatriz(Parametros param)
         {
-            ContornoReflector();
+            //ContornoReflector();
             Boolean matrizsolida = ComprobarMatrizSolida();
             if (matrizsolida == true)
             {

@@ -66,7 +66,10 @@ namespace Crystal_Simulation_App
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            // Actualizamos la velocidad de la simulación
             timer.Interval = TimeSpan.FromSeconds(1 / slider_Interval.Value);
+
+            // Actualizamos la matriz, calculamos la nueva iteración
             matriz.ActualizarMatriz(param);
             matriz.AvanzarIteracion();
 
@@ -81,16 +84,20 @@ namespace Crystal_Simulation_App
                     if (T > 0) { T = 0; }
                     if (T < -1) { T = -1; }
 
-                    byte redvalue = Convert.ToByte(Math.Floor((1 + T) * 255));
-                    SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-                    mySolidColorBrush.Color = Color.FromArgb(redvalue, 255, 0, 0);
-                    grid_temp[i, j].Fill = mySolidColorBrush;
-
-                    //TextBlock TB = new TextBlock();
-                    //TB.Text = matriz.GetCelda(i, j).GetTemperaturaActual().ToString();
-                    ////The next two magical lines create a special brush that contains a bitmap rendering of the UI element that can then be used like any other brush and its in hardware and is almost the text book example for utilizing all hardware rending performances in WPF unleashed 4.5
-                    //BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
-                    //grid[i, j].Fill = bcb;
+                    if (rb_Color.IsChecked==true)
+                    {
+                        byte redvalue = Convert.ToByte(Math.Floor((1 + T) * 255));
+                        SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                        mySolidColorBrush.Color = Color.FromArgb(redvalue, 255, 0, 0);
+                        grid_temp[i, j].Fill = mySolidColorBrush;
+                    }
+                    else
+                    {
+                        TextBlock TB = new TextBlock();
+                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetTemperaturaActual(),2).ToString();
+                        BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
+                        grid_temp[i, j].Fill = bcb;
+                    }
                 }
             }
 
@@ -99,33 +106,32 @@ namespace Crystal_Simulation_App
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    if(i==2 && j==2)
-                    {
-
-                    }
-
                     double F = matriz.GetCelda(i, j).GetFaseActual();
 
                     if (F < 0) { F = 0; }
                     if (F > 1) { F = 1; }
 
-                    byte bluevalue = Convert.ToByte(Math.Floor((1 - F) * 255));
-                    SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-                    mySolidColorBrush.Color = Color.FromArgb(bluevalue, 0, 0, 255);
-                    grid_phase[i, j].Fill = mySolidColorBrush;
-
-                    //TextBlock TB = new TextBlock();
-                    //TB.Text = matriz.GetCelda(i, j).GetTemperaturaActual().ToString();
-                    ////The next two magical lines create a special brush that contains a bitmap rendering of the UI element that can then be used like any other brush and its in hardware and is almost the text book example for utilizing all hardware rending performances in WPF unleashed 4.5
-                    //BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
-                    //grid[i, j].Fill = bcb;
+                    if (rb_Color.IsChecked == true)
+                    {
+                        byte bluevalue = Convert.ToByte(Math.Floor((1 - F) * 255));
+                        SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                        mySolidColorBrush.Color = Color.FromArgb(bluevalue, 0, 0, 255);
+                        grid_phase[i, j].Fill = mySolidColorBrush;
+                    }
+                    else
+                    {
+                        TextBlock TB = new TextBlock();
+                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetFaseActual(),2).ToString();
+                        BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
+                        grid_phase[i, j].Fill = bcb;
+                    }
                 }
             }
-
         }
 
         private void bt_LoadPanel_Click(object sender, RoutedEventArgs e)
         {
+            //Leemos los valores introducidos por el usuario
             rows = Convert.ToInt32(tb_Rows.Text);
             columns = Convert.ToInt32(tb_Columns.Text);
 
@@ -137,7 +143,7 @@ namespace Crystal_Simulation_App
             alpha = Convert.ToDouble(tb_alpha.Text.Replace(".", ","));
             M = Convert.ToDouble(tb_M.Text.Replace(".", ","));
 
-            
+            // Cremoas Grids, matriz inicial, etc...
             grid_temp = new Rectangle[rows, columns];
             grid_phase = new Rectangle[rows, columns];
             matriz = new Matriz(columns, rows, param);
@@ -147,6 +153,7 @@ namespace Crystal_Simulation_App
             int centralcell_j = Convert.ToInt32(Math.Floor(Convert.ToDouble(columns) / 2));
             matriz.SetCelda( centralcell_i, centralcell_j, celdasolida);
 
+            //Guardamos los parametros introducidos por el usuario en un objeto
             param = new Parametros(M, delta, alpha, deltat, deltax, deltay, epsilon);
 
 
@@ -214,16 +221,20 @@ namespace Crystal_Simulation_App
                     if (T > 0) { T = 0; }
                     if (T < -1) { T = -1; }
 
-                    byte redvalue = Convert.ToByte(Math.Floor((1 + T) * 255));
-                    SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-                    mySolidColorBrush.Color = Color.FromArgb(redvalue, 255, 0, 0);
-                    grid_temp[i, j].Fill = mySolidColorBrush;
-
-                    //TextBlock TB = new TextBlock();
-                    //TB.Text = Math.Round(matriz.GetCelda(i, j).GetTemperaturaActual(), 2).ToString();
-                    ////The next two magical lines create a special brush that contains a bitmap rendering of the UI element that can then be used like any other brush and its in hardware and is almost the text book example for utilizing all hardware rending performances in WPF unleashed 4.5
-                    //BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
-                    //grid_temp[i, j].Fill = bcb;
+                    if (rb_Color.IsChecked == true)
+                    {
+                        byte redvalue = Convert.ToByte(Math.Floor((1 + T) * 255));
+                        SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                        mySolidColorBrush.Color = Color.FromArgb(redvalue, 255, 0, 0);
+                        grid_temp[i, j].Fill = mySolidColorBrush;
+                    }
+                    else
+                    {
+                        TextBlock TB = new TextBlock();
+                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetTemperaturaActual(), 2).ToString();
+                        BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
+                        grid_temp[i, j].Fill = bcb;
+                    }
                 }
             }
 
@@ -237,16 +248,20 @@ namespace Crystal_Simulation_App
                     if (F < 0) { F = 0; }
                     if (F > 1) { F = 1; }
 
-                    byte bluevalue = Convert.ToByte(Math.Floor((1 - F) * 255));
-                    SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-                    mySolidColorBrush.Color = Color.FromArgb(bluevalue, 0, 0, 255);
-                    grid_phase[i, j].Fill = mySolidColorBrush;
-
-                    //TextBlock TB = new TextBlock();
-                    //TB.Text = Math.Round(matriz.GetCelda(i, j).GetFaseActual(), 2).ToString();
-                    ////The next two magical lines create a special brush that contains a bitmap rendering of the UI element that can then be used like any other brush and its in hardware and is almost the text book example for utilizing all hardware rending performances in WPF unleashed 4.5
-                    //BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
-                    //grid_phase[i, j].Fill = bcb;
+                    if (rb_Color.IsChecked == true)
+                    {
+                        byte bluevalue = Convert.ToByte(Math.Floor((1 - F) * 255));
+                        SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                        mySolidColorBrush.Color = Color.FromArgb(bluevalue, 0, 0, 255);
+                        grid_phase[i, j].Fill = mySolidColorBrush;
+                    }
+                    else
+                    {
+                        TextBlock TB = new TextBlock();
+                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetFaseActual(), 2).ToString();
+                        BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
+                        grid_phase[i, j].Fill = bcb;
+                    }
                 }
             }
 
@@ -271,8 +286,10 @@ namespace Crystal_Simulation_App
 
         private void bt_NextStep_Click(object sender, RoutedEventArgs e)
         {
+            // Actualizamos la matriz, calculamos la nueva iteración
             matriz.ActualizarMatriz(param);
             matriz.AvanzarIteracion();
+
 
             // Creamos un panel y lo coloreamos en funcion de los valores de TEMPERATURA de cada celda
             for (int i = 0; i < rows; i++)
@@ -284,16 +301,20 @@ namespace Crystal_Simulation_App
                     if (T > 0) { T = 0; }
                     if (T < -1) { T = -1; }
 
-                    //byte redvalue = Convert.ToByte(Math.Floor((1 + T) * 255));
-                    //SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-                    //mySolidColorBrush.Color = Color.FromArgb(redvalue, 255, 0, 0);
-                    //grid_temp[i, j].Fill = mySolidColorBrush;
-
-                    TextBlock TB = new TextBlock();
-                    TB.Text = Math.Round(matriz.GetCelda(i, j).GetTemperaturaActual(),2).ToString();
-                    //The next two magical lines create a special brush that contains a bitmap rendering of the UI element that can then be used like any other brush and its in hardware and is almost the text book example for utilizing all hardware rending performances in WPF unleashed 4.5
-                    BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
-                    grid_temp[i, j].Fill = bcb;
+                    if (rb_Color.IsChecked == true)
+                    {
+                        byte redvalue = Convert.ToByte(Math.Floor((1 + T) * 255));
+                        SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                        mySolidColorBrush.Color = Color.FromArgb(redvalue, 255, 0, 0);
+                        grid_temp[i, j].Fill = mySolidColorBrush;
+                    }
+                    else
+                    {
+                        TextBlock TB = new TextBlock();
+                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetTemperaturaActual(), 2).ToString();
+                        BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
+                        grid_temp[i, j].Fill = bcb;
+                    }
                 }
             }
 
@@ -307,16 +328,20 @@ namespace Crystal_Simulation_App
                     if (F < 0) { F = 0; }
                     if (F > 1) { F = 1; }
 
-                    //byte bluevalue = Convert.ToByte(Math.Floor((1 - F) * 255));
-                    //SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-                    //mySolidColorBrush.Color = Color.FromArgb(bluevalue, 0, 0, 255);
-                    //grid_phase[i, j].Fill = mySolidColorBrush;
-
-                    TextBlock TB = new TextBlock();
-                    TB.Text = Math.Round(matriz.GetCelda(i, j).GetFaseActual(),2).ToString();
-                    //The next two magical lines create a special brush that contains a bitmap rendering of the UI element that can then be used like any other brush and its in hardware and is almost the text book example for utilizing all hardware rending performances in WPF unleashed 4.5
-                    BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
-                    grid_phase[i, j].Fill = bcb;
+                    if (rb_Color.IsChecked == true)
+                    {
+                        byte bluevalue = Convert.ToByte(Math.Floor((1 - F) * 255));
+                        SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+                        mySolidColorBrush.Color = Color.FromArgb(bluevalue, 0, 0, 255);
+                        grid_phase[i, j].Fill = mySolidColorBrush;
+                    }
+                    else
+                    {
+                        TextBlock TB = new TextBlock();
+                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetFaseActual(), 2).ToString();
+                        BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
+                        grid_phase[i, j].Fill = bcb;
+                    }
                 }
             }
         }
