@@ -31,10 +31,10 @@ namespace Crystal_Simulation_App
 
 
             int i = 0;
-            while (i < filas + 2)
+            while (i < filas)
             {
                 int j = 0;
-                while (j < columnas + 2)
+                while (j < columnas)
                 {
                     this.panel[i, j] = new Celda(-1, 1, param); //Celda en estado liquido 
                     j++;
@@ -78,10 +78,10 @@ namespace Crystal_Simulation_App
         public void ActualizarMatriz(Parametros param)
         {
             int i = 1;
-            while (i < filas + 1)
+            while (i < filas - 1)
             {
                 int j = 1;
-                while (j < columnas + 1)
+                while (j < columnas - 1)
                 {
                     // Estado de la Celda a investigar
                     double faseActual = this.panel[i, j].GetFaseActual();
@@ -92,7 +92,7 @@ namespace Crystal_Simulation_App
                     double temperaturaSuperior = this.panel[i - 1, j].GetTemperaturaActual();
 
                     //Estado de la celda inferior
-                    double faseInferior = this.panel[i , j].GetFaseActual();
+                    double faseInferior = this.panel[i + 1 , j].GetFaseActual();
                     double temperaturaInferior = this.panel[i + 1, j].GetTemperaturaActual();
 
                     //Estado de la celda izquierda
@@ -122,10 +122,10 @@ namespace Crystal_Simulation_App
         public void AvanzarIteracion()
         {
             int i = 1;
-            while (i < filas + 1)
+            while (i < filas - 1)
             {
                 int j = 1;
-                while (j < columnas + 1)
+                while (j < columnas - 1)
                 {
                     this.panel[i, j].SetFaseActual(this.panel[i, j].GetFaseFutura());
                     this.panel[i, j].SetTemperaturaActual(this.panel[i, j].GetTemperaturaFutura());
