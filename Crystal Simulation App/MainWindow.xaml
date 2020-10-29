@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="913.141" Width="1610.119">
     <Grid Margin="0,0,5,29.5">
-        <Canvas Name="panelGame" Height="625" Margin="431,53,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="691"/>
+        <Canvas Name="panelGame_Temp" Height="466" Margin="457,58,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="514"/>
+        <Canvas x:Name="panelGame_Phase" Height="466" Margin="1016,58,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="514"/>
 
 
         <Label Content="Rows:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,53,0,0" FontSize="20"/>
@@ -41,7 +42,10 @@
         <Button x:Name="bt_PauseSimulation" Content="Pause/Continue Simulation" HorizontalAlignment="Left" Height="30" Margin="60,426,0,0" VerticalAlignment="Top" Width="326" Click="bt_PauseSimulation_Click"/>
         <TextBox x:Name="tb_alpha" HorizontalAlignment="Left" Height="30" Margin="286,172,0,0" TextWrapping="Wrap" Text="400" VerticalAlignment="Top" Width="100" FontSize="20"/>
         <Label x:Name="temperaturaResultadoLabel" Content="Label" HorizontalAlignment="Left" Margin="168,495,0,0" VerticalAlignment="Top"/>
-        <Button Name="bt_NextStep" Content="Load Panel" HorizontalAlignment="Left" Height="30" Margin="65,716,0,0" VerticalAlignment="Top" Width="326" Click="bt_NextStep_Click"/>
+        <Button Name="bt_NextStep" Content="Next Step" HorizontalAlignment="Left" Height="30" Margin="65,716,0,0" VerticalAlignment="Top" Width="326" Click="bt_NextStep_Click"/>
+        <Label Content="Temperature:" HorizontalAlignment="Left" Height="39" Margin="652,19,0,0" VerticalAlignment="Top" Width="230" FontSize="15"/>
+        <Label Content="Phase:" HorizontalAlignment="Left" Height="39" Margin="1249,19,0,0" VerticalAlignment="Top" Width="230" FontSize="15"/>
+
 
 
 
