@@ -62,6 +62,16 @@ namespace Crystal_Simulation_App
 
         private void R_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            //leemos la celda clicada
+            Rectangle reg = (Rectangle)sender; // Obtenemos el rectangulo sobre el que se clicó
+            Point p = (Point)reg.Tag; // recuperamos el tag, que contiene las coordenadas de la casilla clicada
+
+            //posicion en el panel
+            int fil = Convert.ToInt32(p.X + 1);
+            int col = Convert.ToInt32(p.Y + 1);
+
+            lb_phasevalue.Content = matriz.GetCelda(rows,col).GetFaseActual().ToString();
+            lb_tempvalue.Content = matriz.GetCelda(rows, col).GetFaseActual().ToString();
         }
 
         private void timer_Tick(object sender, EventArgs e)
