@@ -83,6 +83,15 @@ namespace Crystal_Simulation_App
             matriz.ActualizarMatriz(param);
             matriz.AvanzarIteracion();
 
+            int centralcell_i = Convert.ToInt32(Math.Floor(Convert.ToDouble(rows) / 2));
+            int centralcell_j = Convert.ToInt32(Math.Floor(Convert.ToDouble(columns) / 2));
+
+
+            lb_tempvalue.Content = matriz.GetCelda(centralcell_i, centralcell_j - 1).GetTemperaturaActual();
+            lb_phasevalue.Content = matriz.GetCelda(centralcell_i, centralcell_j - 1).GetFaseActual();
+
+
+
 
             // Creamos un panel y lo coloreamos en funcion de los valores de TEMPERATURA de cada celda
             for (int i = 0; i < rows; i++)
@@ -299,6 +308,13 @@ namespace Crystal_Simulation_App
             // Actualizamos la matriz, calculamos la nueva iteración
             matriz.ActualizarMatriz(param);
             matriz.AvanzarIteracion();
+            int centralcell_i = Convert.ToInt32(Math.Floor(Convert.ToDouble(rows) / 2));
+            int centralcell_j = Convert.ToInt32(Math.Floor(Convert.ToDouble(columns) / 2));
+
+
+            lb_tempvalue.Content = matriz.GetCelda(centralcell_i, centralcell_j - 1).GetTemperaturaActual();
+            lb_phasevalue.Content = matriz.GetCelda(centralcell_i, centralcell_j - 1).GetFaseActual();
+
 
 
             // Creamos un panel y lo coloreamos en funcion de los valores de TEMPERATURA de cada celda

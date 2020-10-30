@@ -89,6 +89,7 @@ namespace Crystal_Simulation_App
             double derivadadostemperaturax = (temperaturaDerecha - 2 * temperaturaActual + temperaturaIzquierda) / (deltaX * deltaX);
             double derivadadostemperaturay = (temperaturaSuperior - 2 * temperaturaActual + temperaturaInferior) / (deltaY * deltaY);
 
+
             // Laplaciano
 
             double laplacianoFase = derivadadosfasex + derivadadosfasey;
@@ -96,9 +97,7 @@ namespace Crystal_Simulation_App
 
             // Derivadas temporales
 
-            //double derivadafaset = (1 / (epsilon * epsilon * M)) * (faseActual*(1 - faseActual)*(faseActual - 0.5 + 30*epsilon*alpha*delta*temperaturaActual*faseActual*(1-faseActual))) + (epsilon * epsilon * laplacianoFase);
             double derivadafaset = (1 / (epsilon * epsilon * M)) * (faseActual * (1 - faseActual) * (faseActual - (1 / 2) + (30 * epsilon * alpha * delta * temperaturaActual * faseActual * (1 - faseActual))) + (epsilon * epsilon * laplacianoFase));
-          //  double derivadatemperaturat = laplacianoTemperatura - (1 / delta) * (30 * Math.Pow(faseActual, 2) - 60 * Math.Pow(faseActual,3) + 30 * Math.Pow(faseActual,4))*derivadafaset;
             double derivadatemperaturat = laplacianoTemperatura - (1 / delta) * ((30 * faseActual * faseActual) - (60 * faseActual * faseActual * faseActual) + (30 * faseActual * faseActual * faseActual * faseActual)) * derivadafaset;
             // Set fase y temperatura futura 
 
