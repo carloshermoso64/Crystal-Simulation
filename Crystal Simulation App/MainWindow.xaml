@@ -52,12 +52,20 @@
             <RadioButton Name="rb_Color" Content="Colors" IsChecked="True"/>
             <RadioButton Name="rb_Value" Content="Values"/>
         </StackPanel>
-        <Label Content="Value of Temp:" HorizontalAlignment="Left" Height="27" Margin="234,583,0,-21.5" VerticalAlignment="Top" Width="90"/>
-        <Label Content="Value of Phase: " Height="78" Canvas.Left="-620" Canvas.Top="549" Width="120" Margin="234,599,910,-88.5"/>
-        <Label Name ="lb_tempvalue" Content="Value of Temp:" HorizontalAlignment="Left" Height="27" Margin="337,583,0,-21.5" VerticalAlignment="Top" Width="90"/>
-        <Label Name="lb_phasevalue" Content="Value of Phase: " Height="78" Width="120" Margin="337,599,807,-88.5"/>
+        <Label Content="Value of Temp Cell 1:" HorizontalAlignment="Left" Height="27" Margin="512,583,0,-18" VerticalAlignment="Top" Width="90"/>
+        <Label Content="Value of Phase Cell 1: " Height="78" Canvas.Left="-620" Canvas.Top="549" Width="120" Margin="514,601,633,-87"/>
+        <Label Name ="lb_tempvalue" Content="Value of Temp:" HorizontalAlignment="Left" Height="27" Margin="615,583,0,-18" VerticalAlignment="Top" Width="90"/>
+        <Label Name="lb_phasevalue" Content="Value of Phase: " Height="78" Width="120" Margin="617,601,530,-87"/>
         <Button Name ="bt_ParameterSet1" Content="Set Parameter Set 1" HorizontalAlignment="Left" Height="22" Margin="61,289,0,0" VerticalAlignment="Top" Width="158" Click="bt_ParameterSet1_Click"/>
         <Button Name="bt_ParameterSet2" Content="Set Parameter Set 2" HorizontalAlignment="Left" Height="22" Margin="234,289,0,0" VerticalAlignment="Top" Width="158" Click="bt_ParameterSet2_Click"/>
+        <Label Content="Value of Temp Cell 2:" HorizontalAlignment="Left" Height="27" Margin="776,583,0,-18" VerticalAlignment="Top" Width="122"/>
+        <Label Content="Value of Phase Cell 2: " Height="78" Width="120" Margin="778,601,369,-87"/>
+        <Label x:Name ="lb_tempvalue_2" Content="Value of Temp:" HorizontalAlignment="Left" Height="27" Margin="912,583,0,-18" VerticalAlignment="Top" Width="90"/>
+        <Label x:Name="lb_phasevalue_2" Content="Value of Phase: " Height="78" Width="120" Margin="912,601,235,-87"/>
+        <Label Content="Value of Temp solid cell:" HorizontalAlignment="Left" Height="27" Margin="234,583,0,-18" VerticalAlignment="Top" Width="145"/>
+        <Label Content="Value of Phase solid cell: " Height="78" Margin="236,601,888,-87"/>
+        <Label x:Name ="lb_tempvalue_solid" Content="Value of Temp:" HorizontalAlignment="Left" Height="27" Margin="384,582,0,-17" VerticalAlignment="Top" Width="90"/>
+        <Label x:Name="lb_phasevalue_solid" Content="Value of Phase: " Height="78" Width="120" Margin="384,601,763,-87"/>
 
 
 

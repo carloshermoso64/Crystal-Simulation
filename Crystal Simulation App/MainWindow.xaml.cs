@@ -314,7 +314,10 @@ namespace Crystal_Simulation_App
 
             lb_tempvalue.Content = matriz.GetCelda(centralcell_i, centralcell_j - 1).GetTemperaturaActual();
             lb_phasevalue.Content = matriz.GetCelda(centralcell_i, centralcell_j - 1).GetFaseActual();
-
+            lb_tempvalue_2.Content = matriz.GetCelda(centralcell_i, centralcell_j - 2).GetTemperaturaActual();
+            lb_phasevalue_2.Content = matriz.GetCelda(centralcell_i, centralcell_j - 2).GetFaseActual();
+            lb_tempvalue_solid.Content = matriz.GetCelda(centralcell_i, centralcell_j ).GetTemperaturaActual();
+            lb_phasevalue_solid.Content = matriz.GetCelda(centralcell_i, centralcell_j ).GetFaseActual();
 
 
             // Creamos un panel y lo coloreamos en funcion de los valores de TEMPERATURA de cada celda
