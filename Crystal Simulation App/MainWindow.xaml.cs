@@ -321,7 +321,7 @@ namespace Crystal_Simulation_App
                     else
                     {
                         TextBlock TB = new TextBlock();
-                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetTemperaturaActual(), 2).ToString();
+                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetTemperaturaActual(), 3).ToString();
                         BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
                         grid_temp[i, j].Fill = bcb;
                     }
@@ -348,12 +348,34 @@ namespace Crystal_Simulation_App
                     else
                     {
                         TextBlock TB = new TextBlock();
-                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetFaseActual(), 2).ToString();
+                        TB.Text = Math.Round(matriz.GetCelda(i, j).GetFaseActual(), 3).ToString();
                         BitmapCacheBrush bcb = new BitmapCacheBrush(TB);
                         grid_phase[i, j].Fill = bcb;
                     }
                 }
             }
+        }
+
+        private void bt_ParameterSet1_Click(object sender, RoutedEventArgs e)
+        {
+            tb_deltax.Text = 0.005.ToString();
+            tb_deltay.Text = 0.005.ToString();
+            tb_deltat.Text = 0.000005.ToString();
+            tb_delta.Text = 0.5.ToString();
+            tb_epsilon.Text = 0.005.ToString();
+            tb_alpha.Text = 400.ToString();
+            tb_M.Text = 20.ToString();
+        }
+
+        private void bt_ParameterSet2_Click(object sender, RoutedEventArgs e)
+        {
+            tb_deltax.Text = 0.005.ToString();
+            tb_deltay.Text = 0.005.ToString();
+            tb_deltat.Text = 0.000005.ToString();
+            tb_delta.Text = 0.7.ToString();
+            tb_epsilon.Text = 0.005.ToString();
+            tb_alpha.Text = 300.ToString();
+            tb_M.Text = 30.ToString();
         }
     }
 }
